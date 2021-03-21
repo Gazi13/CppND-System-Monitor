@@ -3,12 +3,19 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <unistd.h>
+#include <iostream>
 
 #include "process.h"
+#include "linux_parser.h"
 
+using std::stol;
 using std::string;
 using std::to_string;
 using std::vector;
+
+
+
 
 // Constructor 
 Process::Process(int pid) {

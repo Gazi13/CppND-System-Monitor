@@ -1,8 +1,12 @@
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 #include "format.h"
 
 using std::string;
+using std::stringstream;
+
 
 // TODO: Complete this helper function
 // INPUT: Long int measuring seconds
