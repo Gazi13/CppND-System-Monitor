@@ -51,5 +51,5 @@ long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 
 // Overload the "less than" comparison operator for Process objects
 bool Process::operator<(Process const& a) const { 
-  return stol(LinuxParser::Ram(pid_)) > stol(LinuxParser::Ram(a.pid_));
+  return stol(LinuxParser::Ram(pid_)) < stol(LinuxParser::Ram(a.pid_));
 }
