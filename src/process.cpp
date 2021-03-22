@@ -9,6 +9,7 @@
 #include "process.h"
 #include "linux_parser.h"
 
+using namespace std;
 using std::stol;
 using std::string;
 using std::to_string;
@@ -28,14 +29,18 @@ int Process::Pid() { return pid_; }
 // Return this process's CPU utilization
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 float Process::CpuUtilization() { 
+  
   float totalTime = float(LinuxParser::ActiveJiffies(Pid()));
   float startTime = float(LinuxParser::UpTime(Pid()));
   float upTime = float(LinuxParser::UpTime());
   
-  float seconds = upTime - (startTime / sysconf(_SC_CLK_TCK)) ;
-    
-  return (totalTime / sysconf(_SC_CLK_TCK)) / seconds;
+  //float seconds = upTime - (startTime / sysconf(_SC_CLK_TCK)) ;
+  
+  //cout << " totalTime/hrz:"<< totalTime/sysconf(_SC_CLK_TCK)<<" / second:"<<seconds << "\n" << " upTime: " << upTime << "- startTime/hrz" << (startTime / sysconf(_SC_CLK_TCK)) << " id:" << Pid()<<" ";
+  
+  return (totalTime / sysconf(_SC_CLK_TCK) / (startTime));
 }
+
 
 // Return the command that generated this process
 string Process::Command() { return LinuxParser::Command(pid_); }
