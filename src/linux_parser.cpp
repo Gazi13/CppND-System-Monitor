@@ -125,7 +125,13 @@ long LinuxParser::ActiveJiffies(int pid) {
     }
   }
   // Grab active jiffies utime - stime - cutime - cstime
-  return stol(values[13] + values[14] + values[15] + values[16]);
+  long utime = std::stol(values[13]);
+  long stime = std::stol(values[14]);
+  long cutime = std::stol(values[15]);
+  long cstime = std::stol(values[16]);
+
+  return utime + stime + cutime + cstime;
+  //return stol(values[13] + values[14] + values[15] + values[16]);
 }
 
 // TODO: Read and return the number of active jiffies for the system
@@ -271,7 +277,7 @@ long LinuxParser::UpTime(int pid) {
   int i = 0;
     while (linestream >> value) {
       if (i == 21) {
-        return stol(value) / sysconf(_SC_CLK_TCK);
+        return sysconf(_SC_CLK_TCK);
       }
       i++;
     }
